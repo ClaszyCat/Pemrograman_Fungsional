@@ -8,43 +8,25 @@ expenses = [
 # TODO 1 Buatlah Fungsi add_expense disini
 def add_expense(expenses, date, description, amount):
     new_expense = {'tanggal': date, 'deskripsi': description, 'jumlah': amount}
-    expenses.append(new_expense)
-    return expenses
+    return expenses + [new_expense]
+
 
 # TODO 2 Buatlah fungsi calculate_total_expenses disini
-
-
-def calculate_total_expenses(expenses):
-    total = 0
-    for expense in expenses:
-        total += expense['jumlah']
-    return total
+calculate_total_expenses = lambda expenses, date: sum(
+    expenses['jumlah'] for expense in expenses if expense['tanggal'] == date
+)
 
 # TODO 3 Buatlah fungsi get_expenses_by_date disini
-
-
 def get_expenses_by_date(expenses, date):
-    expenses_on_date = [
-        expense for expense in expenses if expense['tanggal'] == date]
-    return expenses_on_date
+    return [expense for expense in expenses if expense['tanggal'] == date]
 
 # TODO 4 Buatlah fungsi generate_expenses_report disini
-
-
 def generate_expenses_report(expenses):
-    report = {}
     for expense in expenses:
-        date = expense['tanggal']
-        amount = expense['jumlah']
-        if date in report:
-            report[date] += amount
-        else:
-            report[date] = amount
-    return report
-
+        yield expense
 
 # TODO 6 ubah fungsi berikut ke dalam bentuk lambda
-def get_user_input(command): return int(input(command))
+get_user_input = lambda command: int(input(command))
 
 
 def add_expense_interactively(expenses):
