@@ -1,3 +1,5 @@
+
+
 import random
 
 def create_board(height, width, default_char='-'):
@@ -5,11 +7,7 @@ def create_board(height, width, default_char='-'):
     board = [[default_char for _ in range(width)] for _ in range(height)]
     return board
 
-def generate_random_position(height, width):
-    while True:
-        row = random.randint(0, height - 1)
-        col = random.randint(0, width - 1)
-        yield (row, col)
+generate_random_position = lambda height, width: (random.randint(0, height - 1), random.randint(0, width - 1))
 
 def place_piece(board, row, col, piece_char):
     # Menempatkan bidak pada posisi yang ditentukan
@@ -20,10 +18,10 @@ def place_piece(board, row, col, piece_char):
 
 def print_board(board):
     for row in board:
-        print(' '.join(row))
+        print(' ').join(row)
 
 def move_piece(board, position, move_direction):
-    # Fungsi ini akan memindahkan bidak ke arah yang ditentukan
+    # Memindahkan bidak ke arah yang ditentukan
     row, col = position
     new_row, new_col = row, col
 
@@ -47,18 +45,14 @@ def main():
     height = int(input("Masukkan panjang board: "))
     width = int(input("Masukkan lebar board: "))
 
-    # Membuat board sesuai dengan inputan, mengisi dengan karakter '-'
     board = create_board(height, width)
 
-    # Membuat generator posisi awal bidak dan tujuan bidak secara acak
     position_generator = generate_random_position(height, width)
     start_row, start_col = next(position_generator)
     goal_row, goal_col = next(position_generator)
 
     # Menempatkan bidak (simbol 'A') pada posisi awal yang dihasilkan secara acak
     place_piece(board, start_row, start_col, 'A')
-
-    # Menempatkan tujuan bidak (simbol 'O') pada posisi yang dihasilkan secara acak
     place_piece(board, goal_row, goal_col, 'O')
 
     print("Selamat datang dalam permainan!")
