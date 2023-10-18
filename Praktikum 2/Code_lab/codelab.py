@@ -83,7 +83,7 @@ def main():
         elif choice == 4:
             view_expenses_report(expenses)
         elif choice == 5:
-            print("Terima kasih telah menggunakan aplikasi kami.")
+            print("Terima kasih telah menggunakan aplikasi kami :)")
             break
         else:
             print("Pilihan tidak valid. Silakan pilih menu yang benar.")
