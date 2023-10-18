@@ -1,5 +1,3 @@
-
-
 import random
 
 def create_board(height, width, default_char='-'):
