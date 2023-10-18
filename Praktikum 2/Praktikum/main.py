@@ -39,11 +39,9 @@ def move_piece(board, position, move_direction):
         return row, col
 
 def main():
-    # Input panjang dan lebar dari pengguna
     height = int(input("Masukkan panjang board: "))
     width = int(input("Masukkan lebar board: "))
 
-    # Membuat board sesuai dengan inputan, mengisi dengan karakter '-'
     board = create_board(height, width)
 
     # Membuat generator posisi awal bidak dan tujuan bidak secara acak
@@ -51,31 +49,68 @@ def main():
     start_row, start_col = position_generator()
     goal_row, goal_col = position_generator()
 
-    # Menempatkan bidak (simbol 'A') pada posisi awal yang dihasilkan secara acak
     place_piece(board, start_row, start_col, 'A')
-
-    # Menempatkan tujuan bidak (simbol 'O') pada posisi yang dihasilkan secara acak
     place_piece(board, goal_row, goal_col, 'O')
 
     print("Selamat datang dalam permainan!")
     print_board(board)
 
-    while True:
-        move_direction = input("Masukkan arah pergerakan (w/a/s/d) atau 'q' untuk keluar: ").lower()
+    repeat = input(
+        "New Position (Y/N)?"
+    ).lower()
 
-        if move_direction == 'q':
-            print("Anda keluar dari permainan.")
-            break
+    ulang = 0
 
-        if move_direction not in ['w', 'a', 's', 'd']:
-            print("Arah pergerakan tidak valid. Harap masukkan arah yang benar.")
-            continue
+    while repeat == "y":
+     if (board[start_row][start_col] == board[goal_row][goal_col]):
+        print("Index A dan O Sama")
+        print("Generating Ulang ...")
+     else:
+        # Clear the previous positions
+        board[start_row][start_col] = "-"
+        board[goal_row][goal_col] = "-"
 
-        start_row, start_col = move_piece(board, (start_row, start_col), move_direction)
+        try:
+            # Generate new positions
+            positions = position_generator()
+            start_row, goal_row = positions[0], positions[1]
+            board[start_row][start_col] = "A"
+            board[goal_row][goal_col] = "O"
+        except IndexError:
+            print("Kesalahan dalam menghasilkan posisi awal dan tujuan.")
+
         print_board(board)
+        repeat = input(
+            "New Position (Y/N)?"
+        ).lower()
+        ulang += 1
+        if ulang == 3:
+            print("Maksimal 3 dalam mengubah posisi!")
+            repeat = "n"
 
+
+    while True:
+        move = input("Masukkan arah pergerakan (w/a/s/d) atau 'q' untuk keluar: ").lower()
+        # move_list = [i for i in move_direction]
+        for move_direction in move:
+
+            if move_direction == 'q':
+                print("Anda keluar dari permainan.")
+                break
+
+            if move_direction not in ['w', 'a', 's', 'd']:
+                print("Arah pergerakan tidak valid. Harap masukkan arah yang benar.")
+                continue
+
+            start_row, start_col = move_piece(board, (start_row, start_col), move_direction)
+            
         if (start_row, start_col) == (goal_row, goal_col):
             print("Selamat! Anda menang!")
+            break
+
+
+
+        print_board(board)
 
 if __name__ == "__main__":
     main()
