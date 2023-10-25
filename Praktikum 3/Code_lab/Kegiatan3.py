@@ -1,4 +1,3 @@
-# Data list seperti pada kegiatan 1 modul 1
 random_list = [3.1, 2.7, 5.5, 105, 737, 412, 'Hello', 'Python', 'world', 'AI']
 
 # Filter() untuk memisahkan nilai float, int, dan string
