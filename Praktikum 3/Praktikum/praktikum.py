@@ -64,20 +64,20 @@ def find_movie(movies):
 
 def main():
     while True:
-        print("\nHere's Your Option: ")
-        print("1. Count film by genre")
-        print("2. Average rate film by year")
-        print("3. Find the highest rate")
-        print("4. Search Film")
-        print("5. Exit")
-        choose = int(input("What You Wanna Do? : "))
+        print("\nPilih tugas yang ingin dilakukan: ")
+        print("1. Menghitung Jumlah Film Berdasarkan genre")
+        print("2. Menghitung rata-rata rating film berdasarkan tahun rilis")
+        print("3. Menemukan film dengan rating tertinggi")
+        print("4. Cari Judul film")
+        print("5. Keluar")
+        choose = int(input("Masukan pilihan : "))
 
         if choose == 1:
             for genre, count in genre_counts.items():
-                print(f"Jumlah Film Genre '{genre}': {count}")
+                print(f"Jumlah Film Berdasarkan Genre '{genre}': {count}")
         elif choose == 2:
             for year, avg_rating in year_to_average_rating.items():
-                print(f"Rata-rata rating untuk tahun {year}: {avg_rating}")
+                print(f"Rata-rata rating untuk tahun rilis {year}: {avg_rating[1]:.2f}")
         elif choose == 3:
             if highest_rated:
                 title = highest_rated["title"]
@@ -86,7 +86,7 @@ def main():
                 rating = highest_rated["rating"]
                 print(f"Informasi Film Terbaik: {title} ({year}), Genre: {genre}, Rating: {rating}")
             else:
-                print("Can't Find It")
+                print("Film dengan judul tersebut tidak ditemukan")
         elif choose == 4:
             find_movie(movies)
         elif choose == 5:
